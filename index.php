@@ -6,7 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 function autoloader($class_name)
 {
-    $directories = ['', '/controllers', '/views', '/templates', '/src'];
+    $directories = ['', '/controllers', '/views', '/templates', '/src', '/models'];
     foreach ($directories as $dir) {
         $file = __DIR__ . $dir . '/' . $class_name . '.php';
         if (file_exists($file)) {
@@ -16,6 +16,7 @@ function autoloader($class_name)
     }
 }
 spl_autoload_register('autoloader');
+
 
 $app = AppFactory::create();
 
