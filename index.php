@@ -6,7 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 function autoloader($class_name)
 {
-    $directories = ['', '/controllers', '/views', '/templates', '/src', '/models'];
+    $directories = ['', '/controllers', '/views', '/templates', '/src', '/models', '/config'];
     foreach ($directories as $dir) {
         $file = __DIR__ . $dir . '/' . $class_name . '.php';
         if (file_exists($file)) {

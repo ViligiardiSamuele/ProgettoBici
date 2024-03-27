@@ -26,3 +26,7 @@ Sarà possibile visualizzare le statistiche del proprio account, infatti, gli ut
 
 ## Crediti
 L’idea, la progettazione, lo sviluppo ed il mantenimento del progetto sono a curati da Viligiardi Samuele.
+
+---
+[Database MySql](MYSQL.md)
+---

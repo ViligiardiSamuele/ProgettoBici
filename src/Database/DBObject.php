@@ -1,25 +1,54 @@
 <?php
 
-class DBObject implements JsonSerializable
+abstract class DBObject implements JsonSerializable
 {
+    protected $table;
 
-    protected string $table;
-
-    public function __construct($table)
-    {
-        $this->table = $table;
-    }
-
-    function getTable(): string
+    function getTable()
     {
         return $this->table;
     }
 
-    function jsonSerialize()
+    /**
+     * restituisce le variabili dell'oggetto (eccetto table) 
+     */
+    function getVars()
+    {
+        $vars = [];
+        foreach (get_class_vars(get_class($this)) as $name => $value) {
+            if ($name != 'table')
+                $vars[] = $name;
+        }
+        return $vars;
+    }
+
+    /**
+     * restituisce i valori per ogni colonna
+     * se string saranno circondanti dagli apici
+     */
+    function getValues()
+    {
+        $values = [];
+        foreach (get_class_vars(get_class($this)) as $key => $value) {
+            if ($key != 'table') {
+                switch (gettype($this->{$key})) {
+                    case 'string':
+                        $values[] = '\'' . $this->{$key} . '\'';
+                        break;
+                    default:
+                        $values[] = $this->{$key};
+                }
+            }
+        }
+        return $values;
+    }
+
+    public function jsonSerialize()
     {
         $attr = [];
-        foreach (get_class_vars(get_class($this)) as $key => $value)
-            $attr[$key] = $this->{$key};
+        foreach (get_class_vars(get_class($this)) as $name => $value) {
+            $attr[$name] = $this->{$name};
+        }
         return $attr;
     }
 }

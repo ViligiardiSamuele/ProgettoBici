@@ -9,7 +9,7 @@ class Utente extends DBObject
 
     public function __construct($id_utente, $nome, $cognome, $id_credenziali)
     {
-        parent::__construct('Utente'); //table
+        $this->table = 'Utenti';
         $this->id_utente = $id_utente;
         $this->nome = $nome;
         $this->cognome = $cognome;
